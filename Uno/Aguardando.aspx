@@ -18,5 +18,12 @@
         <asp:Button ID="Pronto" runat="server" Text="Pronto!" OnClick="Pronto_Click" />
     </div>
     </form>
+
+    <script type="text/javascript" src="application.js"></script>
+    <script type="text/javascript">
+        atualizacaoAutomatica(1000, function () {
+            window.location = "Aguardando.aspx";
+        });
+    </script>
 </body>
 </html>

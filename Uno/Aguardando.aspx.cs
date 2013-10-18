@@ -53,6 +53,10 @@ namespace Uno
         {
             Jogador jogador = (Jogador) Session["jogador"];
             jogador.estaPronto = true;
+            
+            Jogo jogo = (Jogo) Application["jogo"];
+            jogo.houveAlteracao = true;
+            jogador.atualizou = true;
 
             Response.Redirect("Aguardando.aspx");
         }

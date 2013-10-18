@@ -14,5 +14,11 @@
         <asp:Label ID="Resultado" runat="server" Text=""></asp:Label>
         <asp:Button ID="NovoJogo" runat="server" Text="Novo Jogo" OnClick="NovoJogo_Click" />
     </form>
+    <script type="text/javascript" src="application.js"></script>
+    <script type="text/javascript">
+        atualizacaoAutomatica(1000, function () {
+            window.location = "Terminou.aspx";
+        });
+    </script>
 </body>
 </html>

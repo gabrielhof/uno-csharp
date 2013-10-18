@@ -101,9 +101,14 @@ namespace Uno
 
         protected void ComprarCarta_Click(object sender, EventArgs e)
         {
+            Jogo jogo = (Jogo)Application["jogo"];
+
             Jogador jogador = (Jogador) Session["jogador"];
-            jogador.compraCarta((Jogo) Application["jogo"]);
+            jogador.compraCarta(jogo);
             jogador.jaComprouCarta = true;
+
+            jogo.houveAlteracao = true;
+            jogador.atualizou = true;
 
             Response.Redirect("JogoUno.aspx");
         }

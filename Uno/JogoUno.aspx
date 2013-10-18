@@ -27,5 +27,12 @@
         <asp:Button ID="PassarVez" runat="server" Text="Passar a Vez" OnClick="PassarVez_Click" />
     </div>
     </form>
+
+    <script type="text/javascript" src="application.js"></script>
+    <script type="text/javascript">
+        atualizacaoAutomatica(1000, function () {
+            window.location = "JogoUno.aspx";
+        });
+    </script>
 </body>
 </html>

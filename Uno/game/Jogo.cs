@@ -17,11 +17,32 @@ namespace Uno.game
 
         public List<Carta> descartadas;
 
+        private Boolean _houveAlteracao = false;
+        public Boolean houveAlteracao
+        {
+            get {
+                return _houveAlteracao;
+            }
+ 
+            set {
+                if (value)
+                {
+                    foreach (Jogador jogador in jogadores)
+                    {
+                        jogador.atualizou = false;
+                    }
+                }
+
+                _houveAlteracao = value;
+            }
+        }
+
         public Jogo()
         {
             this.jogadores = new List<Jogador>();
             this.descartadas = new List<Carta>();
 
+            this.houveAlteracao = false;
             this.baralho = new Baralho();
         }
 
@@ -68,12 +89,25 @@ namespace Uno.game
 
         public void trocarJogador()
         {
+            Jogador antigoJogador = null;
             if (this.jogadorAtual != null)
             {
+                antigoJogador = this.jogadorAtual;
                 this.jogadorAtual.jaComprouCarta = false;
             }
 
-            this.jogadorAtual = pegaProximoJogador();
+            do
+            {
+                this.jogadorAtual = pegaProximoJogador();
+            } while (this.jogadorAtual.estaBloqueado());
+
+            houveAlteracao = true;
+
+            if (antigoJogador != null)
+            {
+                antigoJogador.atualizou = true;
+            }
+            
         }
 
         public Jogador pegaProximoJogador()
@@ -102,6 +136,8 @@ namespace Uno.game
         public void novoJogador(Jogador jogador)
         {
             this.jogadores.Add(jogador);
+            this.houveAlteracao = true;
+            jogador.atualizou = true;
         }
 
         public Boolean possuiVencedor()

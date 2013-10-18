@@ -13,10 +13,13 @@ namespace Uno.game
 
         private Boolean bloqueado = false;
 
+        public Boolean atualizou { get; set; }
+
         public Boolean jaComprouCarta { get; set; }
 
         public Jogador()
         {
+            atualizou = false;
             estaPronto = false;
             cartas = new List<Carta>();
 
@@ -47,6 +50,9 @@ namespace Uno.game
                 {
                     jogo.trocarJogador();
                 }
+
+                jogo.houveAlteracao = true;
+                atualizou = true;
             }
 
             return resultado;
