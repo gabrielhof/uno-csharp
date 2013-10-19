@@ -19,6 +19,21 @@ namespace Uno
     public class WebService : System.Web.Services.WebService
     {
 
+        [WebMethod(EnableSession = true)]
+        public Boolean JogoTerminou()
+        {
+            Jogo jogo = (Jogo)Application["jogo"];
+
+            if (jogo == null || jogo.estaIniciado())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         [WebMethod(EnableSession=true)]
         public Boolean FoiAtualizado()
         {

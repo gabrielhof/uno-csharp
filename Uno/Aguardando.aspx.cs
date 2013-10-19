@@ -10,15 +10,30 @@ namespace Uno
 {
     public partial class Aguardando : System.Web.UI.Page
     {
+
+        private Jogo jogo;
+        private Jogador jogadorSessao;
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!this.validarRequisicao())
+            {
+                return;
+            }
+
+            this.carregarJogadores();
+            this.carregarAcoes();
+        }
+
+        private Boolean validarRequisicao()
         {
             if (Session.IsNewSession || Session["jogador"] == null)
             {
                 Response.Redirect("Index.aspx");
-                return;
+                return false;
             }
 
-            Jogo jogo = (Jogo) Application["jogo"];
+            jogo = (Jogo)Application["jogo"];
 
             if (jogo.podeIniciar())
             {
@@ -28,25 +43,41 @@ namespace Uno
                 }
 
                 Response.Redirect("JogoUno.aspx");
-                return;
+                return false;
             }
-            else
+
+            jogadorSessao = (Jogador) Session["jogador"];
+
+            return true;
+        }
+
+        private void carregarJogadores()
+        {
+            foreach (Jogador jogador in jogo.jogadores)
             {
-                foreach (Jogador jogador in jogo.jogadores)
-                {
-                    TableCell nomeJogador = new TableCell();
-                    nomeJogador.Text = jogador.nome;
+                TableCell icon = new TableCell();
+                icon.Text = "<span class='glyphicon glyphicon-user'></span>";
 
-                    TableCell estaPronto = new TableCell();
-                    estaPronto.Text = jogador.estaPronto ? "Sim" : "Não";
+                TableCell nomeJogador = new TableCell();
+                nomeJogador.Text = jogador.nome;
 
-                    TableRow row = new TableRow();
-                    row.Cells.Add(nomeJogador);
-                    row.Cells.Add(estaPronto);
+                TableCell estaPronto = new TableCell();
+                estaPronto.Text = jogador.estaPronto ? "<span class='glyphicon glyphicon-thumbs-up'></span>" : "<span class='glyphicon glyphicon-thumbs-down'></span>";
 
-                    Tabela.Rows.Add(row);
-                }
+                TableRow row = new TableRow();
+                row.Cells.Add(icon);
+                row.Cells.Add(nomeJogador);
+                row.Cells.Add(estaPronto);
+
+                Tabela.Rows.Add(row);
             }
+        }
+
+        private void carregarAcoes()
+        {
+            Pronto.Visible = !jogadorSessao.estaPronto;
+            PararDeJogar.Visible = !jogadorSessao.estaPronto;
+            AguardandoButton.Visible = jogadorSessao.estaPronto;
         }
 
         protected void Pronto_Click(object sender, EventArgs e)
@@ -59,6 +90,15 @@ namespace Uno
             jogador.atualizou = true;
 
             Response.Redirect("Aguardando.aspx");
+        }
+
+        protected void PararDeJogar_Click(object sender, EventArgs e)
+        {
+            Jogo jogo = (Jogo) Application["jogo"];
+            jogo.removerJogador((Jogador) Session["jogador"]);
+
+            Session.Abandon();
+            Response.Redirect("Index.aspx");
         }
     }
 }

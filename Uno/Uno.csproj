@@ -30,12 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -58,8 +59,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Aguardando.aspx" />
+    <Content Include="AguardarNovoJogo.aspx" />
+    <Content Include="assets\css\bootstrap-theme.css" />
+    <Content Include="assets\css\bootstrap-theme.min.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\image\sad_octocat.png" />
+    <Content Include="assets\image\VERSO.png" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\jquery-2.0.3.min.js" />
     <Content Include="Index.aspx" />
-    <Content Include="application.js" />
+    <Content Include="assets\js\application.js" />
     <Content Include="JogoUno.aspx" />
     <Content Include="Terminou.aspx" />
     <Content Include="Web.config">
@@ -74,6 +87,13 @@
     </Compile>
     <Compile Include="Aguardando.aspx.designer.cs">
       <DependentUpon>Aguardando.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AguardarNovoJogo.aspx.cs">
+      <DependentUpon>AguardarNovoJogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AguardarNovoJogo.aspx.designer.cs">
+      <DependentUpon>AguardarNovoJogo.aspx</DependentUpon>
     </Compile>
     <Compile Include="game\CartaBloquear.cs" />
     <Compile Include="game\CartaInverter.cs" />
@@ -111,6 +131,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,7 +141,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

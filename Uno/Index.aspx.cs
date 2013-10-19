@@ -10,32 +10,45 @@ namespace Uno
 {
     public partial class Index : System.Web.UI.Page
     {
+        private Jogo jogo;
+        private Jogador jogador;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Jogo jogo = (Jogo) Application["jogo"];
+            if (!this.validarRequisicao())
+            {
+                return;
+            }
+        }
+
+        private Boolean validarRequisicao()
+        {
+            jogo = (Jogo)Application["jogo"];
             if (jogo == null)
             {
                 jogo = new Jogo();
                 Application["jogo"] = jogo;
             }
 
-            if (!Session.IsNewSession)
+            jogador = Session.IsNewSession ? null : (Jogador)Session["jogador"];
+
+            if (jogo.estaIniciado() && jogador == null)
             {
-                Jogador jogador = (Jogador) Session["jogador"];
-                if (jogador != null)
-                {
-                    if (jogo.estaIniciado())
-                    {
-                        Response.Redirect("JogoUno.aspx");
-                        return;
-                    }
-                    else
-                    {
-                        Response.Redirect("Aguardando.aspx");
-                        return;
-                    }
-                }
+                Response.Redirect("AguardarNovoJogo.aspx");
+                return false;
             }
+            else if (!jogo.estaIniciado() && jogador != null)
+            {
+                Response.Redirect("Aguardando.aspx");
+                return false;
+            }
+            else if (jogo.estaIniciado() && jogador != null)
+            {
+                Response.Redirect("JogoUno.aspx");
+                return false;
+            }
+
+            return true;
         }
 
         protected void Iniciar_Click(object sender, EventArgs e)

@@ -22,15 +22,6 @@ namespace Uno {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// UltimaCarta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label UltimaCarta;
-        
-        /// <summary>
         /// Table control.
         /// </summary>
         /// <remarks>
@@ -40,22 +31,22 @@ namespace Uno {
         protected global::System.Web.UI.WebControls.Table Table;
         
         /// <summary>
-        /// Cartas control.
+        /// SuaVezPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Cartas;
+        protected global::System.Web.UI.WebControls.Panel SuaVezPanel;
         
         /// <summary>
-        /// CartasHeader control.
+        /// UltimaCarta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableHeaderCell CartasHeader;
+        protected global::System.Web.UI.WebControls.Label UltimaCarta;
         
         /// <summary>
         /// ComprarCarta control.
@@ -64,7 +55,7 @@ namespace Uno {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ComprarCarta;
+        protected global::System.Web.UI.WebControls.LinkButton ComprarCarta;
         
         /// <summary>
         /// PassarVez control.
@@ -73,6 +64,24 @@ namespace Uno {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PassarVez;
+        protected global::System.Web.UI.WebControls.LinkButton PassarVez;
+        
+        /// <summary>
+        /// SuasCartas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label SuasCartas;
+        
+        /// <summary>
+        /// Cartas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Cartas;
     }
 }

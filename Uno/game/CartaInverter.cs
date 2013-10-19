@@ -25,7 +25,7 @@ namespace Uno.game
 
         public override string ToString()
         {
-            return "Trocar";
+            return "TROCA";
         }
 
     }

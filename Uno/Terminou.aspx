@@ -4,20 +4,36 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, minimum-scale:1.0, user-scalable=no" />
+    <title>Fim :D</title>
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="assets/css/style.css" rel="stylesheet" media="screen" />
+    <style type="text/css">
+        form.form {
+            max-width: 60%;
+            padding-left: 10%;
+        }
+    </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-    
+    <div class="content">
+        <form id="form1" runat="server" class="form">
+            <h2><asp:Label ID="Resultado" runat="server" Text="Parabéns blablabla, você venceu o jogo!"></asp:Label></h2>
+            
+            <br />
+
+            <asp:Button ID="NovoJogo" runat="server" Text="Novo Jogo" OnClick="NovoJogo_Click" CssClass="btn btn-primary"/>
+        </form>
     </div>
-        <asp:Label ID="Resultado" runat="server" Text=""></asp:Label>
-        <asp:Button ID="NovoJogo" runat="server" Text="Novo Jogo" OnClick="NovoJogo_Click" />
-    </form>
+
+     <script type="text/javascript" src="assets/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/application.js"></script>
     <script type="text/javascript" src="application.js"></script>
     <script type="text/javascript">
         atualizacaoAutomatica(1000, function () {
-            window.location = "Terminou.aspx";
+            window.location = "/Terminou.aspx";
         });
     </script>
 </body>

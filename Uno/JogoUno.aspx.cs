@@ -10,84 +10,155 @@ namespace Uno
 {
     public partial class JogoUno : System.Web.UI.Page
     {
+        private Jogo jogo;
+        private Jogador jogadorSessao;
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!this.validarRequisicao())
+            {
+                return;
+            }
+
+            this.carregarCartasJogadorSessao();
+
+            if (this.jogadorSessaoBloqueado())
+            {
+                return;
+            }
+
+            this.carregarUltimaCartaDescartada();
+            this.carregarJogadores();
+            this.configuraBotoes();
+        }
+
+        private Boolean validarRequisicao()
         {
             if (Session.IsNewSession || Session["jogador"] == null)
             {
                 Response.Redirect("Index.aspx");
-                return;
+                return false;
             }
 
-            Jogo jogo = (Jogo) Application["jogo"];
+            jogo = (Jogo) Application["jogo"];
             if (!jogo.podeIniciar())
             {
                 Response.Redirect("Aguardando.aspx");
-                return;
+                return false;
             }
             else if (jogo.possuiVencedor() || jogo.empatou())
             {
                 Response.Redirect("Terminou.aspx");
-                return;
+                return false;
             }
 
-            Jogador jogadorSessao = (Jogador)Session["jogador"];
+            this.jogadorSessao = (Jogador) Session["jogador"];
+            return true;
+        }
 
+        private void carregarCartasJogadorSessao()
+        {
+            if (jogadorSessao.Equals(jogo.jogadorAtual))
+            {
+                LiteralControl aviso = new LiteralControl();
+                aviso.Text = "<div class='alert alert-success'>";
+                aviso.Text += "<strong>" + jogadorSessao.nome  + ", é a sua vez agora!</strong>";
+                aviso.Text += "</div>";
+
+                SuaVezPanel.Visible = true;
+                SuaVezPanel.Controls.Add(aviso);
+            }
+            else
+            {
+                SuaVezPanel.Visible = false;
+            }
+
+            SuasCartas.Text = "<strong>" + jogadorSessao.nome + "</strong>, essas são suas cartas:";
+            SuasCartas.Text += "<span class='glyphicon glyphicon-tower' style='float: right;'></span> ";
+
+            int contadorBotao = 0;
+            foreach (Carta carta in jogadorSessao.cartas)
+            {
+                ImageButton imageButton = new ImageButton();
+                imageButton.ID = "carta_" + contadorBotao++;
+                imageButton.ImageUrl = carta.ToImageTag();
+                imageButton.AlternateText = carta.ToIdentifier();
+                imageButton.Attributes.Add("runat", "server");
+                imageButton.Click += JogarCarta_Click;
+
+                Cartas.Controls.Add(imageButton);
+            }
+        }
+
+        private Boolean jogadorSessaoBloqueado()
+        {
             if (jogadorSessao.estaBloqueado())
             {
                 jogo.trocarJogador();
 
                 Response.Redirect("JogoUno.aspx");
-                return;
+                return true;
             }
 
-            Carta ultimaCarta = jogo.pegaUltimaCartaDescartada();
-            UltimaCarta.Text = ultimaCarta.ToString();
-            UltimaCarta.Style["color"] = ultimaCarta.ToColorHash();
+            return false;
+        }
 
+        private void carregarUltimaCartaDescartada()
+        {
+            Carta ultimaCarta = jogo.pegaUltimaCartaDescartada();
+            UltimaCarta.Text = "<img src='" + ultimaCarta.ToImageTag() + "' />";
+        }
+
+        private void carregarJogadores()
+        {
             foreach (Jogador jogador in jogo.jogadores)
             {
-                if (!jogador.Equals(jogadorSessao))
+                TableCell icon = new TableCell();
+                icon.Text = "<span class='glyphicon glyphicon-user'></span>";
+
+                TableCell nomeJogador = new TableCell();
+                nomeJogador.Text = jogador.nome;
+
+                if (jogador.Equals(jogadorSessao))
                 {
-                    TableCell nomeJogador = new TableCell();
-                    nomeJogador.Text = jogador.nome;
-
-                    TableCell quantidadeCartas = new TableCell();
-                    quantidadeCartas.Text = jogador.cartas.Count.ToString();
-
-                    TableRow row = new TableRow();
-                    row.Cells.Add(nomeJogador);
-                    row.Cells.Add(quantidadeCartas);
-
-                    Table.Rows.Add(row);
+                    nomeJogador.Text = "<bold>" + nomeJogador.Text + "</bold>";
                 }
+
+                TableCell cartasJogador = new TableCell();
+                cartasJogador.Text = "";
+
+                foreach (Carta carta in jogador.cartas)
+                {
+                    cartasJogador.Text += "<img src='assets/image/VERSO.png' width='30px' height='40px'/>";
+                }
+
+                TableCell currentPlayerIcon = new TableCell();
+                if (jogador.Equals(jogo.jogadorAtual))
+                {
+                    currentPlayerIcon.Text = "<span class='glyphicon glyphicon-arrow-right' title='Jogador Atual'></span>";
+                }
+
+                TableRow row = new TableRow();
+                row.Cells.Add(currentPlayerIcon);
+                row.Cells.Add(icon);
+                row.Cells.Add(nomeJogador);
+                row.Cells.Add(cartasJogador);
+
+                Table.Rows.Add(row);
             }
+        }
 
-            CartasHeader.ColumnSpan = jogadorSessao.cartas.Count;
-            TableRow cartasRow = new TableRow();
-            foreach (Carta carta in jogadorSessao.cartas)
-            {
-                LinkButton link = new LinkButton();
-                link.Text = carta.ToString();
-                link.Style["color"] = carta.ToColorHash();
-                link.Click += JogarCarta_Click;
-
-                TableCell cell = new TableCell();
-                cell.Controls.Add(link);
-
-                cartasRow.Cells.Add(cell);
-            }
-
-            Cartas.Rows.Add(cartasRow);
-
+        private void configuraBotoes()
+        {
             if (!jogadorSessao.Equals(jogo.jogadorAtual))
             {
-                ComprarCarta.Enabled = false;
-                PassarVez.Enabled = false;
+                ComprarCarta.CssClass += " disabled";
+                PassarVez.CssClass += " disabled";
             }
             else
             {
-                ComprarCarta.Enabled = !jogadorSessao.jaComprouCarta;
-                PassarVez.Enabled = jogadorSessao.jaComprouCarta;
+                ComprarCarta.CssClass += (!jogadorSessao.jaComprouCarta ? "" : " disabled");
+                PassarVez.CssClass += (jogadorSessao.jaComprouCarta ? "" : " disabled");
             }
         }
 
@@ -115,7 +186,7 @@ namespace Uno
 
         protected void JogarCarta_Click(object sender, EventArgs e)
         {
-            LinkButton button = (LinkButton) sender;
+            ImageButton button = (ImageButton)sender;
 
             Jogo jogo = (Jogo) Application["jogo"];
 
@@ -125,7 +196,7 @@ namespace Uno
             {
                 foreach (Carta carta in jogador.cartas)
                 {
-                    if (carta.ToString().Equals(button.Text) && carta.ToColorHash().Equals(button.Style["color"]))
+                    if (carta.ToIdentifier().Equals(button.AlternateText))
                     {
                         jogador.descarta(carta, jogo);
                         break;

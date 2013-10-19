@@ -140,6 +140,12 @@ namespace Uno.game
             jogador.atualizou = true;
         }
 
+        public void removerJogador(Jogador jogador)
+        {
+            this.jogadores.Remove(jogador);
+            this.houveAlteracao = true;
+        }
+
         public Boolean possuiVencedor()
         {
             return vencedor != null;

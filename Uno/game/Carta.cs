@@ -28,17 +28,27 @@ namespace Uno.game
             return numero.ToString();
         }
 
-        public String ToColorHash()
+        public String ToColorCode()
         {
             switch (cor)
             {
-                case Cor.AMARELO: return "#B3B000";
-                case Cor.AZUL: return "#0059FF";
-                case Cor.VERDE: return "#00A120";
-                case Cor.VERMELHO: return "#A10000";
+                case Cor.AMARELO: return "AM";
+                case Cor.AZUL: return "AZ";
+                case Cor.VERDE: return "VR";
+                case Cor.VERMELHO: return "VM";
             }
 
             return "";
+        }
+
+        public String ToIdentifier()
+        {
+            return ToColorCode() + "_" + ToString();
+        }
+
+        public String ToImageTag()
+        {
+            return "assets/image/" + ToColorCode() + "_" + ToString() + ".png";
         }
 
     }

@@ -39,11 +39,17 @@ namespace Uno
             Jogo antigoJogo = (Jogo) Application["jogo"];
 
             Jogo jogo = new Jogo();
-            foreach (Jogador jogador in antigoJogo.jogadores)
+
+            if (antigoJogo != null)
             {
-                jogador.estaPronto = false;
-                jogo.novoJogador(jogador);
-                
+                foreach (Jogador jogador in antigoJogo.jogadores)
+                {
+                    jogador.estaBloqueado();
+                    jogador.cartas.Clear();
+                    jogador.estaPronto = false;
+                    jogo.novoJogador(jogador);
+
+                }
             }
 
             jogo.houveAlteracao = true;
