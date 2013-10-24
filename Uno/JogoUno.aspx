@@ -18,6 +18,7 @@
 <body>
     <div class="container">
         <form id="form1" runat="server" class="form">
+            <asp:Panel ID="SuaVezPanel" runat="server" Visible="false"></asp:Panel>
 
             <asp:Table ID="Table" runat="server" CssClass="table">
                 <asp:TableHeaderRow>
@@ -27,9 +28,6 @@
                     <asp:TableHeaderCell>Cartas</asp:TableHeaderCell>
                 </asp:TableHeaderRow>
             </asp:Table>
-
-            <asp:Panel ID="SuaVezPanel" runat="server" Visible="false">
-            </asp:Panel>
 
             <asp:Label ID="UltimaCarta" runat="server" Text="Última Carta Descartada:"></asp:Label>
 
@@ -53,6 +51,8 @@
                 </div>
                 <asp:Panel ID="Cartas" runat="server"></asp:Panel>
             </div>
+
+            <asp:Button runat="server" ID="Sair" CssClass="btn btn-danger" Text="Não quero mais jogar :(" OnClick="Sair_Click" OnClientClick="return confirm('Tem certeza?');"/>
         </form>
     </div>
 
@@ -60,6 +60,8 @@
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/application.js"></script>
     <script type="text/javascript">
+        unloaded = false;
+
         atualizacaoAutomatica(1000, function () {
             window.location = "/JogoUno.aspx";
         });

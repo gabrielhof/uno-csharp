@@ -206,5 +206,19 @@ namespace Uno
 
             Response.Redirect("JogoUno.aspx");
         }
+
+        protected void Sair_Click(object sender, EventArgs e)
+        {
+            jogo.jogadores.Remove(jogadorSessao);
+            Session.Abandon();
+
+            if (jogo.jogadores.Count == 1)
+            {
+                jogo.vencedor = jogo.jogadores[0];
+            }
+
+            jogo.houveAlteracao = true;
+            Response.Redirect("Index.aspx");
+        }
     }
 }

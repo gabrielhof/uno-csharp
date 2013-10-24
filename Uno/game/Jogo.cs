@@ -71,6 +71,11 @@ namespace Uno.game
 
         public Boolean podeIniciar()
         {
+            if (estaIniciado())
+            {
+                return true;
+            }
+
             if (jogadores.Count < 2)
             {
                 return false;
@@ -143,6 +148,7 @@ namespace Uno.game
         public void removerJogador(Jogador jogador)
         {
             this.jogadores.Remove(jogador);
+
             this.houveAlteracao = true;
         }
 

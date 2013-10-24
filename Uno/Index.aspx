@@ -18,7 +18,7 @@
 
             <asp:TextBox ID="Nome" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
-            <asp:Button ID="Iniciar" runat="server" Text="Quero Jogar" OnClick="Iniciar_Click" CssClass="btn btn-lg btn-primary btn-block"/>
+            <asp:Button ID="Iniciar" runat="server" Text="Quero Jogar" OnClick="Iniciar_Click" CssClass="btn btn-lg btn-primary btn-block" />
         </form>
     </div>
 
