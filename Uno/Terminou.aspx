@@ -19,6 +19,7 @@
 <body>
     <div class="content">
         <form id="form1" runat="server" class="form">
+            <asp:HiddenField runat="server" ID="appPath" Value=""/>
             <h2><asp:Label ID="Resultado" runat="server" Text="Parabéns blablabla, você venceu o jogo!"></asp:Label></h2>
             
             <br />
@@ -33,7 +34,7 @@
     <script type="text/javascript" src="application.js"></script>
     <script type="text/javascript">
         atualizacaoAutomatica(1000, function () {
-            window.location = "/Terminou.aspx";
+            window.location = appPath + "Terminou.aspx";
         });
     </script>
 </body>

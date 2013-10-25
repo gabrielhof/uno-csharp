@@ -18,6 +18,7 @@
 <body>
     <div class="container">
         <form id="form1" runat="server" class="form">
+            <asp:HiddenField runat="server" ID="appPath" Value=""/>
             <asp:Panel ID="SuaVezPanel" runat="server" Visible="false"></asp:Panel>
 
             <asp:Table ID="Table" runat="server" CssClass="table">
@@ -63,7 +64,7 @@
         unloaded = false;
 
         atualizacaoAutomatica(1000, function () {
-            window.location = "/JogoUno.aspx";
+            window.location = appPath + "JogoUno.aspx";
         });
     </script>
 </body>

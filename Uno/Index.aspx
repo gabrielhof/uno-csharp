@@ -13,6 +13,7 @@
 <body>
     <div class="container">
         <form id="form1" runat="server" class="form">
+            <asp:HiddenField runat="server" ID="appPath" Value=""/>
             <h1 class="form-heading">Vamos jogar <span>Uno</span>?</h1>
             <br />
 
@@ -24,6 +25,7 @@
 
     <script type="text/javascript" src="assets/js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/application.js"></script>
     <script>
         $(document).ready(function () {
             $("#Nome").attr("placeholder", "Digite seu Nome");

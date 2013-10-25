@@ -30,6 +30,8 @@ namespace Uno
             this.carregarUltimaCartaDescartada();
             this.carregarJogadores();
             this.configuraBotoes();
+
+            //appPath.Value = HttpContext.Current.Request.ApplicationPath;
         }
 
         private Boolean validarRequisicao()

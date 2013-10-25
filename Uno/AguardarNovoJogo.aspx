@@ -23,6 +23,7 @@
 <body>
     <div class="content">
         <form id="form1" runat="server" class="form">
+            <asp:HiddenField runat="server" ID="appPath" Value=""/>
             <img src="assets/image/sad_octocat.png"/>
             <h2>Desculpe, mas o jogo já começou.</h2>
             <h3>Aguarde a próxima rodada...</h3>
@@ -34,8 +35,8 @@
     <script type="text/javascript" src="assets/js/application.js"></script>
     <script type="text/javascript">
         atualizacaoAutomatica(2000, function () {
-            window.location = "/Index.aspx";
-        }, "WebService.asmx/JogoTerminou");
+            window.location = appPath + "Index.aspx";
+        }, appPath + "WebService.asmx/JogoTerminou");
     </script>
 </body>
 </html>
