@@ -1,6 +1,4 @@
-﻿appPath = $("#appPath").val();
-
-function createHttpRequest() {
+﻿function createHttpRequest() {
     var httpRequest = null;
     
     if (window.XMLHttpRequest) {
@@ -14,7 +12,7 @@ function createHttpRequest() {
 
 function atualizacaoAutomatica(timeout, callback, url) {
     if (typeof (url) == "undefined" || url == null) {
-        url = appPath + "WebService.asmx/FoiAtualizado";
+        url = "WebService.asmx/FoiAtualizado";
     }
 
     window.setInterval(function () {

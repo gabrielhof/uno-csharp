@@ -13,7 +13,6 @@
 <body>
     <div class="container">
         <form id="form1" runat="server" class="form">
-            <asp:HiddenField runat="server" ID="appPath" Value=""/>
             <asp:Table ID="Tabela" runat="server" CssClass="table">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell></asp:TableHeaderCell>
@@ -38,7 +37,7 @@
     <script type="text/javascript" src="assets/js/application.js"></script>
     <script type="text/javascript">
         atualizacaoAutomatica(1000, function () {
-            window.location = appPath + "Aguardando.aspx";
+            window.location = "Aguardando.aspx";
         });
     </script>
 </body>

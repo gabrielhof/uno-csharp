@@ -48,8 +48,6 @@ namespace Uno
                 return false;
             }
 
-            appPath.Value = HttpContext.Current.Request.ApplicationPath;
-
             return true;
         }
 
