@@ -3,3 +3,9 @@ d:\documentos\visual studio 2012\Projects\Uno\Uno\bin\Uno.pdb
 d:\documentos\visual studio 2012\Projects\Uno\Uno\obj\Release\Uno.dll
 d:\documentos\visual studio 2012\Projects\Uno\Uno\obj\Release\Uno.pdb
 d:\documentos\visual studio 2012\Projects\Uno\Uno\obj\Release\Uno.csprojResolveAssemblyReference.cache
+E:\users\Gabriel\Documentos\Visual Studio 2015\Projects\uno-csharp\Uno\bin\Uno.dll.config
+E:\users\Gabriel\Documentos\Visual Studio 2015\Projects\uno-csharp\Uno\bin\Uno.dll
+E:\users\Gabriel\Documentos\Visual Studio 2015\Projects\uno-csharp\Uno\bin\Uno.pdb
+E:\users\Gabriel\Documentos\Visual Studio 2015\Projects\uno-csharp\Uno\obj\Release\Uno.csprojResolveAssemblyReference.cache
+E:\users\Gabriel\Documentos\Visual Studio 2015\Projects\uno-csharp\Uno\obj\Release\Uno.dll
+E:\users\Gabriel\Documentos\Visual Studio 2015\Projects\uno-csharp\Uno\obj\Release\Uno.pdb
